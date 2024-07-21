@@ -1,11 +1,16 @@
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
-public class GamePanel extends JPanel{
-	static GamePanel game;
+public class GamePanel extends JPanel implements ActionListener, KeyListener{
+	static JPanel game;
     final int MENU = 0;
     final int GAME = 1;
     final int END = 2;
@@ -13,12 +18,16 @@ public class GamePanel extends JPanel{
     Font titleFont;
     Font subFont;
     Font superFont;
+    Timer frameDraw;
     
     
-    GamePanel(String fontType, Font fontStylization, int fontSize){
+    GamePanel(String fontType, Font fontStylization, int fontSize, Timer frameDraw){
+    	this.frameDraw = frameDraw;
 		titleFont = new Font("Arial", Font.PLAIN, 48);
 		subFont = new Font("Arial", Font.PLAIN, 20);
 		superFont = new Font("Arial", Font.PLAIN, 21);
+		frameDraw = new Timer(1000/60, this);
+		frameDraw.start();
 		
 
     }
@@ -58,6 +67,7 @@ public class GamePanel extends JPanel{
 		g.drawString("Press SPACE for instructions", 100, 600);
 	}
 	 void drawGameState(Graphics g){
+		 System.out.println("game");
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
 	 }
@@ -77,4 +87,58 @@ public class GamePanel extends JPanel{
 		g.setColor(Color.YELLOW);
 		g.drawString("Press ENTER to restart", 100, 600);
 	 }
+	public void actionPerformed(ActionEvent e) {
+		if(currentState == MENU){
+		    updateMenuState();
+		}else if(currentState == GAME){
+		    updateGameState();
+		}else if(currentState == END){
+		    updateEndState();
+		}
+		
+		
+		
+		
+	}
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if(e.getKeyCode()==KeyEvent.VK_ENTER) {
+			System.out.println("enter");
+			if(currentState == END) {
+				currentState = MENU;
+			}	
+			else {
+				System.out.println("HELLO");
+				currentState++;
+				System.out.println(currentState);
+				}
+			}
+	
+		else if(currentState == GAME) {
+			if (e.getKeyCode()==KeyEvent.VK_UP) {
+			    System.out.println("UP");
+			}
+			if (e.getKeyCode()==KeyEvent.VK_DOWN) {
+			    System.out.println("DOWN");
+			}
+			if (e.getKeyCode()==KeyEvent.VK_LEFT) {
+			    System.out.println("LEFT");
+			    }
+			if (e.getKeyCode()==KeyEvent.VK_RIGHT) {
+			    System.out.println("RIGHT");
+			}
+			}
+		}
+		
+	
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 }
