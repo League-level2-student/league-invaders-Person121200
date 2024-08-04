@@ -4,11 +4,14 @@ public class LeagueInvaders {
 	static final int WIDTH = 500;
 	static final int HEIGHT = 800;
 	
-	GamePanel game;
-	JFrame frame;
+	static GamePanel game;
+	static JFrame frame;
 	
+	public static void run() {
+		
+	}
 	public static void main(String[] args) {
-		LeagueInvaders leagueInvaders = new LeagueInvaders(GamePanel.frame, GamePanel.game);
+		LeagueInvaders leagueInvaders = new LeagueInvaders(frame, game);
 	}
 
 	LeagueInvaders(JFrame frame, GamePanel game){
