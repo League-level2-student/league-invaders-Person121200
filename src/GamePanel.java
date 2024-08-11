@@ -138,6 +138,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 			}
 			
 		}
+		
 	}
 	
 
@@ -145,7 +146,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	
 	@Override
 	public void keyReleased(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_W) {
-            ).remove(KeyEvent.VK_UP);
+//		if (e.getKeyCode() == KeyEvent.VK_W) {
+//            ).remove(KeyEvent.VK_UP);
+//	}
 	}
 }
