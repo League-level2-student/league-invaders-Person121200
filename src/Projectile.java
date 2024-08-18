@@ -7,7 +7,7 @@ public class Projectile extends GameObject{
 	int width;
 	int height;
 	int speed = 10;
-	static boolean isActive;
+	boolean isActive;
 	public Projectile(int x, int y, int width, int height, int speed, boolean isActive) {
 		super(x, y, width, height, speed, isActive);
 		this.x =x;
@@ -17,6 +17,7 @@ public class Projectile extends GameObject{
 		this.speed = speed;
 		this.isActive = isActive;
 		}
+
 	public void draw(Graphics g) {
         g.setColor(Color.RED);
         g.fillRect(x, y, width, height);
