@@ -43,6 +43,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		    loadImage ("space.png");
 		
 		}
+		loadImage("alien.png");
+
     }
 	@Override
 	public void paintComponent(Graphics g){
@@ -59,12 +61,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	    alienSpawn.start();
 
 	}
-	public void endgame(){
-		alienSpawn.stop();
-	}
 	
 	void updateMenuState(){
-		object.update();
+		object.update(null);
 	}
 	void updateGameState(){
 		
@@ -91,6 +90,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	 void drawGameState(Graphics g){
 		 g.drawImage(image, 0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT, null);
 		 object.draw(g);
+		 
 
 		}
 	 void  drawEndState(Graphics g){
@@ -117,7 +117,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		}else if(currentState == END){
 		    updateEndState();
 		}
-		repaint();	
+		repaint();
+		
+		
 	}
 	
 	@Override
@@ -130,13 +132,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		if(e.getKeyCode()==KeyEvent.VK_ENTER) {
 			
 			if(currentState == END) {
+				alienSpawn.stop();
 				currentState = MENU;
-				endgame();
 				
 			}	
 			if(currentState == MENU) {
-				currentState = GAME;
 				startGame();
+				currentState = GAME;
 			}
 			else {
 				
@@ -158,7 +160,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 				rocket.down();
 			}
 			
+		if(e.getKeyCode()==KeyEvent.VK_SPACE) {
+			object.addProjectile(rocket.getProjectile());
 
+		}
 			
 		}
 		
@@ -180,6 +185,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	
 	@Override
 	public void keyReleased(KeyEvent e) {
-
+		repaint();
 	}
 }
