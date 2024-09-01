@@ -63,10 +63,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	}
 	
 	void updateMenuState(){
-		object.update(null);
+		
 	}
 	void updateGameState(){
-		
+		object.update(null);
 	}
 	void updateEndState(){
 		
@@ -148,16 +148,16 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 			}
 		if(currentState == GAME) {
 			if(e.getKeyCode()==KeyEvent.VK_LEFT) {
-				rocket.left();
+				rocket.left = true;
 			}
 			if(e.getKeyCode()==KeyEvent.VK_RIGHT) {
-				rocket.right();
+				rocket.right = true;
 			}
 			if(e.getKeyCode()==KeyEvent.VK_UP) {
-				rocket.up();
+				rocket.up = true;
 			}
 			if(e.getKeyCode()==KeyEvent.VK_DOWN) {
-				rocket.down();
+				rocket.down = true;
 			}
 			
 		if(e.getKeyCode()==KeyEvent.VK_SPACE) {
@@ -185,6 +185,20 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	
 	@Override
 	public void keyReleased(KeyEvent e) {
+		if(e.getKeyCode()==KeyEvent.VK_LEFT) {
+			rocket.left = false;
+		}
+		if(e.getKeyCode()==KeyEvent.VK_RIGHT) {
+			rocket.right = false;
+		}
+		if(e.getKeyCode()==KeyEvent.VK_UP) {
+			rocket.up = false;
+		}
+		if(e.getKeyCode()==KeyEvent.VK_DOWN) {
+			rocket.down = false;
+		
+		
+		}
 		repaint();
 	}
 }

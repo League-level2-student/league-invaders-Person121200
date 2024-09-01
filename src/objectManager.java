@@ -17,34 +17,54 @@ public class objectManager implements ActionListener{
 		projectiles.add(projectile);
 	}
 	public void addAlien() {
-		aliens.add(new Alien(ran.nextInt(LeagueInvaders.WIDTH),0,50,50, true));
+		aliens.add(new Alien(ran.nextInt(LeagueInvaders.WIDTH),0,50,50, 2, true));
+
  
 	}
 	public void update(Graphics g){
+		System.out.println("Sk");
 		for(Alien alien: aliens) {
-			alien.update();
+			
 //			System.out.println(aliens.get(i).y);
 			if(alien.y> LeagueInvaders.HEIGHT) {
 				alien.isActive=false;
+				
 
 			}
-			alien.draw(g);
 			alien.update();
 		}
+		for(Projectile projectile:projectiles) {
+			
+			if(projectile.y<0) {
+				projectile.isActive = false;
+				
+				 
+				}
+			projectile.update();
+			
+
+			
+			
+			
+		}
+		rocket.update();
 	}
 	public void draw(Graphics g) {
 		rocket.draw(g);
 		for(Projectile projectile:projectiles) {
-			if(projectile.y<0) {
-				projectile.isActive = false;
-			}
 			projectile.draw(g);
-			projectile.update(); 
+		}
+			
+			for(Alien alien: aliens) {
+//				System.out.println(aliens.get(i).y);
+				alien.draw(g);
+			}
+				
 			
 				
 			
 		}
-	}
+	
 	public void purgeObjects() {
 		
 		for(int i = 0; i < aliens.size(); i++) {
