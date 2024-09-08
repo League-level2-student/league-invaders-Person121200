@@ -8,12 +8,7 @@ public class Projectile extends GameObject{
 	
 	public Projectile(int x, int y, int width, int height, int speed, boolean isActive) {
 		super(x, y, width, height, speed, isActive);
-		this.x =x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
-		this.speed = speed;
-		this.isActive = isActive;
+
 		if(needImage) {
 			loadImage ("bullet.png");
 			needImage = false;
@@ -30,8 +25,8 @@ public class Projectile extends GameObject{
 //	}
 	
 	public void update() {
-		System.out.println(speed);
 		y-=speed;
+		super.update();
 	}
 
 

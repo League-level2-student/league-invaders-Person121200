@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
@@ -10,6 +11,7 @@ public class GameObject {
 	int width;
 	int height;
 	int speed = 0;
+	Rectangle collisionBox;
 	boolean isActive = true;
 	public BufferedImage image;
 	public boolean needImage = true;
@@ -21,10 +23,11 @@ public class GameObject {
 		this.height = height;
 		this.speed = speed;
 		this.isActive = isActive;
-		
+		collisionBox = new Rectangle(x, y, width, height);
 	}
+	
 	public void update() {
-		
+        collisionBox.setBounds(x, y, width, height);
 	}
 	
 	public void draw(Graphics g) {

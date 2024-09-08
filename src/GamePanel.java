@@ -30,7 +30,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
     Font subFont;
     Font superFont;
     Timer frameDraw;
-    Rocketship rocket = new Rocketship(x, y, width, height, 20, true);
+    Rocketship rocket = new Rocketship(x, y, width, height, 5, true);
     objectManager object = new objectManager(rocket);
     GamePanel(String fontType, Font fontStylization, int fontSize, Timer frameDraw){
     	this.frameDraw = frameDraw;
@@ -67,6 +67,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	}
 	void updateGameState(){
 		object.update(null);
+		if(rocket.isActive == false) {
+			currentState = END;
+		}
 	}
 	void updateEndState(){
 		
@@ -103,11 +106,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		
 		g.setFont(subFont);
 		g.setColor(Color.YELLOW);
-		g.drawString("You killed enemies", 150, 400);
+		g.drawString("You killed "+object.score+" enemies", 150, 400);
 		
 		g.setFont(superFont);
 		g.setColor(Color.YELLOW);
-		g.drawString("Press ENTER to restart", 100, 600);
 	 }
 	public void actionPerformed(ActionEvent e) {
 		if(currentState == MENU){
@@ -133,6 +135,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 			
 			if(currentState == END) {
 				alienSpawn.stop();
+				
 				currentState = MENU;
 				
 			}	
@@ -145,6 +148,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 				currentState++;
 				
 				}
+			System.out.println(currentState);
 			}
 		if(currentState == GAME) {
 			if(e.getKeyCode()==KeyEvent.VK_LEFT) {
